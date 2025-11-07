@@ -1,0 +1,104 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #2d3748;
+  border-bottom: 2px solid #4a5568;
+  margin-bottom: 30px;
+  width: 100%;
+  box-sizing: border-box; 
+  max-width: 100%;
+}
+
+.nav-brand a {
+  color: #38b2ac;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap; 
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap; 
+}
+
+.nav-link {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.nav-link:hover {
+  background: #4a5568;
+}
+
+.nav-link.active {
+  background: #38b2ac;
+  color: white;
+}
+
+.cart-badge {
+  background: #e53e3e;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: #4a5568;
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+  }
+  
+  .nav-links {
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .nav-link {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 10px;
+  }
+  
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .nav-brand a {
+    font-size: 1.3rem;
+  }
+}

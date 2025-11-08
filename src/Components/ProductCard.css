@@ -11,7 +11,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .product-card::before {
@@ -56,7 +56,7 @@
 
 .product-info {
   text-align: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .product-name {
@@ -65,7 +65,7 @@
   margin: 12px 0 8px 0;
   color: #e2e8f0;
   line-height: 1.4;
-  word-wrap: break-word; 
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
@@ -77,6 +77,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Стили для обычной кнопки "В корзину" */
 .add-to-cart {
   background: linear-gradient(135deg, #38b2ac, #2c7a7b);
   color: white;
@@ -89,9 +90,9 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  width: 100%; 
+  width: 100%;
   letter-spacing: 0.5px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .add-to-cart::before {
@@ -117,6 +118,58 @@
 
 .add-to-cart:active {
   transform: translateY(0);
+}
+
+/* Стили для кнопок когда товар уже в корзине */
+.cart-controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.go-to-cart-btn {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.go-to-cart-btn:hover {
+  background: linear-gradient(135deg, #38a169, #2f855a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+}
+
+.add-more-btn {
+  background: linear-gradient(135deg, #ed8936, #dd6b20);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-more-btn:hover {
+  background: linear-gradient(135deg, #dd6b20, #c05621);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
 }
 
 .quantity-counter {
@@ -149,6 +202,50 @@
   }
 }
 
+.add-notification {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #38b2ac;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  animation: slideDown 0.3s ease;
+  z-index: 10;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Стили для светлой темы */
+.app.light .go-to-cart-btn {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+}
+
+.app.light .go-to-cart-btn:hover {
+  background: linear-gradient(135deg, #38a169, #2f855a);
+}
+
+.app.light .add-more-btn {
+  background: linear-gradient(135deg, #ed8936, #dd6b20);
+}
+
+.app.light .add-more-btn:hover {
+  background: linear-gradient(135deg, #dd6b20, #c05621);
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
   .product-card {
     width: 100%;
@@ -162,6 +259,21 @@
   
   .product-price {
     font-size: 1.3rem;
+  }
+  
+  .cart-controls {
+    gap: 6px;
+  }
+  
+  .go-to-cart-btn {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .add-more-btn {
+    padding: 10px 12px;
+    width: 45px;
+    font-size: 1.1rem;
   }
 }
 
@@ -180,5 +292,15 @@
   
   .product-price {
     font-size: 1.2rem;
+  }
+  
+  .cart-controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .add-more-btn {
+    width: 100%;
+    padding: 8px;
   }
 }

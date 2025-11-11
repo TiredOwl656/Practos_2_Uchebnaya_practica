@@ -1,9 +1,7 @@
-// CartContext.jsx
 import { createContext, useContext, useReducer } from 'react';
 
 const CartContext = createContext();
 
-// Объект с обработчиками вместо switch-case
 const cartHandlers = {
   INSERT_INTO_THE_CART: (state, payload) => {
     const existingItem = state.items.find(item => item.id === payload.id);

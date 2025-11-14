@@ -1,4 +1,4 @@
-.login-page {
+.register-page {
   min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
@@ -7,12 +7,12 @@
   background: var(--card-bg);
 }
 
-.login-container {
+.register-container {
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
 }
 
-.login-card {
+.register-card {
   background: var(--card-bg);
   padding: 40px 32px;
   border-radius: var(--radius);
@@ -21,21 +21,21 @@
   text-align: center;
 }
 
-.login-title {
+.register-title {
   margin: 0 0 12px;
   font-size: 2rem;
   font-weight: 700;
   color: var(--text);
 }
 
-.login-subtitle {
+.register-subtitle {
   margin: 0 0 32px;
   color: var(--primary);
   font-size: 1rem;
   font-weight: 500;
 }
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -74,7 +74,7 @@
   box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.2);
 }
 
-.login-btn {
+.register-btn {
   background: var(--primary);
   color: white;
   border: none;
@@ -87,38 +87,37 @@
   margin-top: 10px;
 }
 
-.login-btn:hover:not(:disabled) {
+.register-btn:hover:not(:disabled) {
   background: #319795;
   transform: translateY(-1px);
 }
 
-.login-btn:disabled {
+.register-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.login-footer {
+.register-footer {
   margin-top: 28px;
   font-size: 0.95rem;
   color: var(--text);
 }
 
-.register-link {
+.login-link {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
 }
 
-.register-link:hover {
+.login-link:hover {
   text-decoration: underline;
 }
 
-/* === Адаптив === */
 @media (max-width: 480px) {
-  .login-card {
+  .register-card {
     padding: 32px 24px;
   }
-  .login-title {
+  .register-title {
     font-size: 1.7rem;
   }
 }

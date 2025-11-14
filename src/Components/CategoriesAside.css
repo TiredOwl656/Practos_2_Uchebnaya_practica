@@ -1,0 +1,168 @@
+.categories-aside {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  min-width: 220px;
+  max-width: 260px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--border);
+}
+
+.categories-aside h3 {
+  margin: 0 0 18px;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  gap: 10px;
+}
+
+.category-item:hover {
+  background: rgba(56, 178, 172, 0.15);
+  transform: translateX(2px);
+}
+
+.app.light .category-item:hover {
+  background: rgba(44, 122, 123, 0.1);
+}
+
+.category-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  margin: 0;
+}
+
+.category-item span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+}
+
+/* Активная категория */
+.category-item input[type="checkbox"]:checked + span {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .categories-aside {
+    position: static;
+    top: auto;
+    order: -1;
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    padding: 20px;
+  }
+
+  .category-item {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-aside h3 {
+    font-size: 1.2rem;
+  }
+
+  .category-item span {
+    font-size: 0.95rem;
+  }
+}
+
+.categories-aside {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.categories-aside h3 {
+  margin: 0 0 16px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  gap: 8px;
+  user-select: none;
+}
+
+.category-item:hover {
+  background: rgba(56, 178, 172, 0.15);
+}
+
+.app.light .category-item:hover {
+  background: rgba(44, 122, 123, 0.1);
+}
+
+.category-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.category-item span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Скроллбар для aside */
+.categories-aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+.categories-aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.categories-aside::-webkit-scrollbar-thumb {
+  background: rgba(74, 85, 104, 0.5);
+  border-radius: 3px;
+}
+
+.app.light .categories-aside::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 224, 0.5);
+}

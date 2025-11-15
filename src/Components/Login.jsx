@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useCart } from '../contexts/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import './Login.css'; // ИМПОРТ СТИЛЕЙ
+import './Login.css';
 
 const API = 'http://localhost:3001/api';
 

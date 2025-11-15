@@ -133,16 +133,13 @@ app.post('/api/orders/create', async (req, res) => {
   try {
     await client.query('BEGIN');
 
-    // 1. Рассчитываем общую сумму
     const totalAmount = items.reduce((sum, item) => sum + (item.base_price * item.quantity), 0);
 
-    // 2. Получаем статус "оформлен"
     const statusRes = await client.query(
       "SELECT status_id FROM order_statuses WHERE status_name = 'оформлен'"
     );
     const statusId = statusRes.rows[0].status_id;
 
-    // 3. Создаем заказ
     const orderRes = await client.query(
       `INSERT INTO orders (user_id, status_id, total_amount) 
        VALUES ($1, $2, $3) RETURNING order_id`,
@@ -150,7 +147,6 @@ app.post('/api/orders/create', async (req, res) => {
     );
     const orderId = orderRes.rows[0].order_id;
 
-    // 4. Уменьшаем количество товара на складе
     for (const item of items) {
       await client.query(
         'UPDATE products SET stock_quantity = stock_quantity - $1 WHERE product_id = $2',
@@ -158,7 +154,6 @@ app.post('/api/orders/create', async (req, res) => {
       );
     }
 
-    // 5. Очищаем корзину пользователя
     const cartRes = await client.query('SELECT cart_id FROM carts WHERE user_id = $1', [userId]);
     if (cartRes.rows.length > 0) {
       await client.query('DELETE FROM cart_items WHERE cart_id = $1', [cartRes.rows[0].cart_id]);
@@ -210,7 +205,6 @@ app.get('/api/orders/:orderId/items', async (req, res) => {
   const { orderId } = req.params;
   
   try {
-    // Получаем пользователя заказа
     const orderRes = await pool.query('SELECT user_id FROM orders WHERE order_id = $1', [orderId]);
     if (orderRes.rows.length === 0) {
       return res.status(404).json({ error: 'Заказ не найден' });
@@ -218,7 +212,6 @@ app.get('/api/orders/:orderId/items', async (req, res) => {
 
     const userId = orderRes.rows[0].user_id;
 
-    // Получаем текущую корзину пользователя (как пример товаров)
     const cartRes = await pool.query('SELECT cart_id FROM carts WHERE user_id = $1', [userId]);
     
     let items = [];
@@ -435,7 +428,6 @@ app.post('/api/cart/add', async (req, res) => {
   }
 
   try {
-    // Проверяем доступное количество товара
     const productRes = await pool.query(
       'SELECT stock_quantity FROM products WHERE product_id = $1',
       [product_id]
@@ -447,7 +439,6 @@ app.post('/api/cart/add', async (req, res) => {
     
     const availableStock = productRes.rows[0].stock_quantity;
     
-    // Получаем текущее количество в корзине
     let cartRes = await pool.query('SELECT cart_id FROM carts WHERE user_id = $1', [userId]);
     let currentQuantity = 0;
     
@@ -462,7 +453,6 @@ app.post('/api/cart/add', async (req, res) => {
       }
     }
     
-    // Проверяем, не превышает ли новое количество доступное
     if (currentQuantity + quantity > availableStock) {
       return res.status(400).json({ 
         error: `Можно добавить только ${availableStock - currentQuantity} шт. этого товара` 

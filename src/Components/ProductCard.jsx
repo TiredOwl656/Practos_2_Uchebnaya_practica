@@ -10,7 +10,6 @@ const ProductCard = ({ product, onAdd }) => {
     stock_quantity 
   } = product;
 
-  // Приводим к числу и защищаем
   const base_price = parseFloat(rawPrice) || 0;
   const inStock = stock_quantity > 0;
 

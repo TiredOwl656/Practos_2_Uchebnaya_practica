@@ -17,7 +17,6 @@ const cartReducer = (state, action) => {
       const existing = state.items.find(i => i.product_id === action.product.product_id);
       
       if (existing) {
-        // Проверяем, не превышает ли новое количество доступное количество
         if (existing.quantity + 1 > action.product.stock_quantity) {
           toast.error('Нельзя добавить больше товара, чем есть в наличии');
           return state;
@@ -33,7 +32,6 @@ const cartReducer = (state, action) => {
         };
       }
       
-      // Проверяем, есть ли товар в наличии для добавления
       if (action.product.stock_quantity < 1) {
         toast.error('Товар закончился');
         return state;
@@ -63,15 +61,12 @@ export const CartProvider = ({ children }) => {
     if (!userId) return;
     
     try {
-      // Проверяем доступное количество на сервере перед добавлением
       const productRes = await axios.get(`http://localhost:3001/api/products/${product.product_id}`);
       const currentStock = productRes.data.stock_quantity;
       
-      // Находим товар в корзине
       const existingItem = state.items.find(item => item.product_id === product.product_id);
       const currentQuantity = existingItem ? existingItem.quantity : 0;
       
-      // Проверяем, не превышает ли новое количество доступное
       if (currentQuantity + 1 > currentStock) {
         toast.error(`Можно добавить только ${currentStock - currentQuantity} шт. этого товара`);
         return;
@@ -90,7 +85,7 @@ export const CartProvider = ({ children }) => {
           product_name: product.product_name,
           base_price: product.base_price,
           image_url: product.image_url,
-          stock_quantity: currentStock // Обновляем актуальное количество
+          stock_quantity: currentStock
         }
       });
     } catch (err) {
@@ -161,7 +156,6 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: 'CLEAR' });
   };
 
-  // Загрузка корзины при монтировании, если пользователь сохранён
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
@@ -171,7 +165,6 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Сохранение пользователя в localStorage
   useEffect(() => {
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));

@@ -31,7 +31,6 @@ function MainLayout() {
         </Routes>
       </main>
 
-      {/* Категории — справа, только на главной */}
       {isHome && <CategoriesAside onFilter={setSelectedCategory} />}
     </div>
   );

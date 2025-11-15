@@ -16,7 +16,6 @@ const Cart = () => {
       return;
     }
 
-    // Проверяем, что все товары в наличии в нужном количестве
     const outOfStockItems = items.filter(item => item.stock_quantity < item.quantity);
     if (outOfStockItems.length > 0) {
       toast.error('Некоторые товары закончились на складе');
@@ -30,8 +29,8 @@ const Cart = () => {
       });
       
       toast.success('Заказ оформлен успешно!');
-      clearCart(); // Очищаем корзину после оформления
-      navigate('/dashboard'); // Перенаправляем в историю заказов
+      clearCart();
+      navigate('/dashboard');
     } catch (err) {
       console.error('Checkout error:', err);
       toast.error(err.response?.data?.error || 'Ошибка оформления заказа');

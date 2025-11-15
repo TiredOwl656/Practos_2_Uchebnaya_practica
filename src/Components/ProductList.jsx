@@ -30,6 +30,25 @@ const ProductList = ({ selectedCategory }) => {
     fetch();
   }, [selectedCategory]);
 
+  const handleAddToCart = async (product) => {
+    if (!user) {
+      toast.error('Войдите, чтобы добавить в корзину');
+      return;
+    }
+
+    if (product.stock_quantity <= 0) {
+      toast.error('Товар закончился');
+      return;
+    }
+
+    try {
+      await addToCart(product, user.id);
+      toast.success('Товар добавлен в корзину');
+    } catch (err) {
+      toast.error('Ошибка добавления в корзину');
+    }
+  };
+
   if (loading) return <div className="loading">Загрузка товаров...</div>;
 
   return (
@@ -39,7 +58,7 @@ const ProductList = ({ selectedCategory }) => {
           <ProductCard 
             key={p.product_id} 
             product={p} 
-            onAdd={() => addToCart(p, user?.id)} 
+            onAdd={() => handleAddToCart(p)} 
           />
         ))}
       </div>

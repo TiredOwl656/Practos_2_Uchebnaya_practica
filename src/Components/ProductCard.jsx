@@ -1,5 +1,6 @@
 import { useCart } from '../contexts/CartContext';
-import './ProductCard.css'; // Импорт стилей
+import './ProductCard.css';
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ product, onAdd }) => {
   const { 
@@ -12,6 +13,22 @@ const ProductCard = ({ product, onAdd }) => {
   // Приводим к числу и защищаем
   const base_price = parseFloat(rawPrice) || 0;
   const inStock = stock_quantity > 0;
+
+  const { user } = useCart();
+
+  const handleAddToCart = () => {
+    if (!user) {
+      toast.error('Войдите, чтобы добавить в корзину');
+      return;
+    }
+    
+    if (!inStock) {
+      toast.error('Товар закончился');
+      return;
+    }
+
+    onAdd();
+  };
 
   return (
     <div className="product-card">
@@ -35,7 +52,7 @@ const ProductCard = ({ product, onAdd }) => {
         </p>
         <button 
           className={`add-to-cart ${!inStock ? 'disabled' : ''}`}
-          onClick={onAdd}
+          onClick={handleAddToCart}
           disabled={!inStock}
         >
           {inStock ? 'В корзину' : 'Недоступно'}

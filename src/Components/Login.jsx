@@ -83,7 +83,7 @@ const Login = () => {
           <p className="login-footer">
             Нет аккаунта?{' '}
             <Link to="/register" className="register-link">
-              Зарегистрироваться
+                Зарегистрироваться
             </Link>
           </p>
         </div>

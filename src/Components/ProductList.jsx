@@ -19,7 +19,11 @@ const ProductList = ({ selectedCategory }) => {
         const url = selectedCategory 
           ? `${API}/products?category_id=${selectedCategory}` 
           : `${API}/products`;
+        console.log('Получение товваров из БД');
         const res = await axios.get(url);
+        if(res){
+          console.log("Товары получены")
+        }
         setProducts(res.data);
       } catch (err) {
         toast.error('Ошибка загрузки товаров');

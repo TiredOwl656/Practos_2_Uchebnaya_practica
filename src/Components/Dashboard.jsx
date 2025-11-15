@@ -45,11 +45,13 @@ const Dashboard = () => {
   const loadAll = async () => {
     try {
       const config = { headers: { 'user-email': user.email } };
+      console.log("Получение данных из БД...")
       const [pRes, uRes, cRes] = await Promise.all([
         axios.get(`${API}/products`),
         axios.get(`${API}/users`, config),
         axios.get(`${API}/categories`)
       ]);
+      console.log("Данные получены")
       setProducts(pRes.data);
       setUsers(uRes.data);
       setCategories(cRes.data);
